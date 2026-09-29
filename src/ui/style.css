@@ -128,4 +128,15 @@ list.link-choices { background: @card_bg_color; border-radius: 12px; box-shadow:
 list.link-choices > row { padding: 8px 12px; border-bottom: none; }
 list.link-choices > row:not(:last-child) { box-shadow: inset 0 -1px @hairline; }
 .trash-badge { min-width: 18px; min-height: 18px; padding: 3px; border-radius: 999px; background: @destructive_bg_color; color: white; -gtk-icon-size: 12px; box-shadow: 0 0 0 3px @dialog_bg_color; }
+/* About */
+.about-dialog headerbar { background: none; box-shadow: none; }
+.about-content { margin: 0 24px 22px; }
+.about-name { font-size: 20px; font-weight: 700; margin-top: 10px; }
+.about-byline { font-size: 13px; font-weight: 600; }
+.about-version { font-size: 12px; color: @secondary_fg; margin-left: 4px; }
+.about-dialog .dialog-body { margin: 12px 0 18px; }
+.about-dialog list.link-choices > row { font-size: 14px; min-height: 26px; }
+.about-link-arrow { color: @secondary_fg; }
+.about-copyright { font-size: 12px; color: @secondary_fg; margin-top: 14px; }
+.vesperx-mark { color: @vesperx_mark; }
 toast { border-radius: 10px; background: @toast_bg; color: white; }

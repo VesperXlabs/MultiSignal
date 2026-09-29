@@ -708,26 +708,45 @@ fn main() {
         saved.contains("mode=system") && saved.contains("width="),
     );
 
-    // About: credits VesperX and links its site and the repository.
+    // About: the app first, then "◇ By VesperX", vesperx.dk and the repository.
     let w = ui::build_window(deps(&tmp.path().join("k"), true, &["Work"], &[]));
     w.activate_action_for_test("about");
-    let about = w.window.visible_dialog().and_downcast::<adw::AboutDialog>();
-    check("About opens from the ⋯ menu", about.is_some());
-    let about = about.unwrap();
-    check("About names VesperX", about.developer_name() == "VesperX");
     check(
-        "About links vesperx.dk",
-        about.website() == "https://vesperx.dk",
+        "About opens from the ⋯ menu",
+        w.window
+            .visible_dialog()
+            .is_some_and(|d| d.has_css_class("about-dialog")),
+    );
+    w.window.visible_dialog().unwrap().close();
+    let about = w.open_about();
+    check(
+        "About keeps the app's own icon",
+        about.icon.icon_name().as_deref() == Some("system-users"),
+    );
+    check("About says By VesperX", about.byline.text() == "By VesperX");
+    check(
+        "…next to the VesperX mark",
+        about.mark.has_css_class("vesperx-mark") && about.mark.parent() == about.byline.parent(),
+    );
+    check(
+        "About shows the version",
+        about.version.text() == env!("CARGO_PKG_VERSION"),
+    );
+    let repo = "https://github.com/VesperXlabs/MultiSignal";
+    check(
+        "About links vesperx.dk, issues and the source",
+        about.links()
+            == [
+                ("Website".to_string(), "https://vesperx.dk".to_string()),
+                ("Report an Issue".to_string(), format!("{repo}/issues")),
+                ("Source Code".to_string(), repo.to_string()),
+            ],
     );
     check(
         "About carries the VesperX ApS copyright",
-        about.copyright().contains("VesperX ApS"),
+        about.copyright.text() == "© 2026 VesperX ApS",
     );
-    check(
-        "About reports issues to the VesperXlabs repository",
-        about.issue_url() == "https://github.com/VesperXlabs/MultiSignal/issues",
-    );
-    about.close();
+    about.dialog.close();
 
     // Task 13: install page.
     let w = ui::build_window(deps(&tmp.path().join("h"), false, &[], &[]));

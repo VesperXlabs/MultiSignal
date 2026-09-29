@@ -1,6 +1,7 @@
 //! The GTK user interface. It renders what the store reports and forwards
 //! clicks to it; every rule lives in the GTK-free modules.
 
+pub mod about_dialog;
 mod app;
 mod avatar;
 pub mod create_dialog;
