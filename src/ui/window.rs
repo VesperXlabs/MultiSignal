@@ -2,6 +2,7 @@
 //! app page is a sidebar + detail split view that folds into list → detail
 //! navigation below 720 px.
 
+use super::about_dialog::{self, AboutDialog};
 use super::create_dialog::{self, CreateDialog, Purpose};
 use super::delete_dialog::{self, TrashDialog};
 use super::detail::{self, DetailWidgets};
@@ -323,7 +324,9 @@ impl MainWindow {
         });
         self.add_action("repair", |this| this.repair(true));
         self.add_action("repair-all", |this| this.repair(false));
-        self.add_action("about", |this| this.show_about());
+        self.add_action("about", |this| {
+            this.open_about();
+        });
         self.add_action("lock-default", |this| this.set_default_locked(true));
         self.add_action("unlock-default", |this| this.set_default_locked(false));
         self.add_action("adopt-default", |this| {
@@ -631,19 +634,8 @@ impl MainWindow {
         self.toast(&text);
     }
 
-    fn show_about(&self) {
-        let about = adw::AboutDialog::builder()
-            .application_name(APP_NAME)
-            .application_icon("system-users")
-            .version(env!("CARGO_PKG_VERSION"))
-            .comments("Run several Signal accounts side by side, each with its own messages and app menu entry.")
-            .developer_name("VesperX")
-            .website(env!("CARGO_PKG_HOMEPAGE"))
-            .issue_url(concat!(env!("CARGO_PKG_REPOSITORY"), "/issues"))
-            .copyright("© 2026 VesperX ApS")
-            .build();
-        about.add_link("Source Code", env!("CARGO_PKG_REPOSITORY"));
-        about.present(Some(&self.window));
+    pub fn open_about(self: &Rc<Self>) -> AboutDialog {
+        about_dialog::present(self, APP_NAME)
     }
 
     /// Installs Signal on a worker thread, then shows the result.
@@ -668,7 +660,7 @@ impl MainWindow {
         }
     }
 
-    fn toast(&self, text: &str) {
+    pub(super) fn toast(&self, text: &str) {
         self.toasts.add_toast(adw::Toast::new(text));
     }
 

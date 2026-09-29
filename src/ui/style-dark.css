@@ -29,3 +29,5 @@
 @define-color success_text #30D158;
 @define-color link_color #0A84FF;
 @define-color toast_bg rgba(58, 58, 60, 0.96);
+/* VesperX mark: the VesperX signal green. */
+@define-color vesperx_mark #34D6A8;
