@@ -708,6 +708,27 @@ fn main() {
         saved.contains("mode=system") && saved.contains("width="),
     );
 
+    // About: credits VesperX and links its site and the repository.
+    let w = ui::build_window(deps(&tmp.path().join("k"), true, &["Work"], &[]));
+    w.activate_action_for_test("about");
+    let about = w.window.visible_dialog().and_downcast::<adw::AboutDialog>();
+    check("About opens from the ⋯ menu", about.is_some());
+    let about = about.unwrap();
+    check("About names VesperX", about.developer_name() == "VesperX");
+    check(
+        "About links vesperx.dk",
+        about.website() == "https://vesperx.dk",
+    );
+    check(
+        "About carries the VesperX ApS copyright",
+        about.copyright().contains("VesperX ApS"),
+    );
+    check(
+        "About reports issues to the VesperXlabs repository",
+        about.issue_url() == "https://github.com/VesperXlabs/MultiSignal/issues",
+    );
+    about.close();
+
     // Task 13: install page.
     let w = ui::build_window(deps(&tmp.path().join("h"), false, &[], &[]));
     check("install page shown", w.visible_page() == "install");

@@ -632,13 +632,18 @@ impl MainWindow {
     }
 
     fn show_about(&self) {
-        adw::AboutDialog::builder()
+        let about = adw::AboutDialog::builder()
             .application_name(APP_NAME)
             .application_icon("system-users")
             .version(env!("CARGO_PKG_VERSION"))
             .comments("Run several Signal accounts side by side, each with its own messages and app menu entry.")
-            .build()
-            .present(Some(&self.window));
+            .developer_name("VesperX")
+            .website(env!("CARGO_PKG_HOMEPAGE"))
+            .issue_url(concat!(env!("CARGO_PKG_REPOSITORY"), "/issues"))
+            .copyright("© 2026 VesperX ApS")
+            .build();
+        about.add_link("Source Code", env!("CARGO_PKG_REPOSITORY"));
+        about.present(Some(&self.window));
     }
 
     /// Installs Signal on a worker thread, then shows the result.

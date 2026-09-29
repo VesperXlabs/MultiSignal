@@ -5,8 +5,8 @@
 **Run several Signal Desktop accounts side by side on Ubuntu.**<br>
 Each profile has its own messages, its own window and its own entry in the app menu.
 
-[![Release](https://img.shields.io/github/v/release/AngelFreak/MultiSignal?sort=semver)](https://github.com/AngelFreak/MultiSignal/releases)
-[![Release build](https://github.com/AngelFreak/MultiSignal/actions/workflows/release.yml/badge.svg)](https://github.com/AngelFreak/MultiSignal/actions/workflows/release.yml)
+[![Release](https://img.shields.io/github/v/release/VesperXlabs/MultiSignal?sort=semver)](https://github.com/VesperXlabs/MultiSignal/releases)
+[![Release build](https://github.com/VesperXlabs/MultiSignal/actions/workflows/release.yml/badge.svg)](https://github.com/VesperXlabs/MultiSignal/actions/workflows/release.yml)
 ![Ubuntu 24.04+](https://img.shields.io/badge/Ubuntu-24.04%2B-E95420?logo=ubuntu&logoColor=white)
 ![GTK 4 + libadwaita](https://img.shields.io/badge/GTK%204-libadwaita-4A86CF?logo=gnome&logoColor=white)
 
@@ -66,7 +66,7 @@ You need Ubuntu 24.04 or newer. You also need the Signal Desktop snap, but the
 app offers to install it.
 
 1. Download `multisignal_<version>_amd64.deb` from
-   [Releases](https://github.com/AngelFreak/MultiSignal/releases).
+   [Releases](https://github.com/VesperXlabs/MultiSignal/releases).
 2. Install it:
 
    ```sh

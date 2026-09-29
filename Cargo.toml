@@ -2,6 +2,8 @@
 name = "multisignal"
 version = "0.2.0"
 edition = "2024"
+repository = "https://github.com/VesperXlabs/MultiSignal"
+homepage = "https://vesperx.dk"
 
 [dependencies]
 adw = { version = "0.9.2", package = "libadwaita", features = ["v1_5"] }
